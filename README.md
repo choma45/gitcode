@@ -1,2 +1,2 @@
-# My server set project 
+# My server project 
 
