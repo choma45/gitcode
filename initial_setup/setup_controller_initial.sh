@@ -51,7 +51,7 @@ while IFS= read -r Line || [[ -n "$Line" ]]; do
     parse_and_get_host_info "$Line"
     Parse_Status=$?
 
-    if [[ $Parse_Status -ne git 0 ]]; then 
+    if [[ $Parse_Status -ne 0 ]]; then 
         continue 
     fi 
 
