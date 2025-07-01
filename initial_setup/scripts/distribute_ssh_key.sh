@@ -1,5 +1,7 @@
 #!/bin/bash
 
+Scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # ~/gitcode/initial_setup/scripts/distribute_ssh_keys.sh
 
 # 현재 스크립트의 실행 권한 확인 (root 권한이 필요할 수 있습니다)
@@ -9,9 +11,9 @@ if [[ $(id -u) -ne 0 ]]; then
 fi
 
 # 대상 호스트 목록 파일 경로 (메인 스크립트와 동일하게 정의)
-Hosts_to_manage="$HOME/gitcode/initial_setup/config_files/hosts_to_manage.txt"
+Hosts_to_manage="$Scripts_dir/config_files/hosts_to_manage.txt"
 # 함수 파일 로드 (함수를 사용하기 위해 source 합니다)
-. "$HOME/gitcode/initial_setup/functions/host_parser.sh"
+. "$Scripts_dir/functions/host_parser.sh"
 
 echo "3. SSH 키 쌍을 생성합니다."
 ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa -q

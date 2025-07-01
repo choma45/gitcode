@@ -1,5 +1,7 @@
 #!/bin/bash
 
+Scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 echo "==== Ansible 컨트롤러 초기 설정 시작 ===="
 
 # 실행권한 확인
@@ -14,11 +16,11 @@ Controller_IP="192.168.30.11"
 Controller_Entry="${Controller_IP} ${Target_Hostname}"
 
 # 대상 호스트 목록 
-Hosts_to_manage="$HOME/gitcode/initial_setup/config_files/hosts_to_manage.txt"
+Hosts_to_manage="$Scripts_dir/config_files/hosts_to_manage.txt"
 # 시스템 호스트 파일 경로
 Hosts_File="/etc/hosts"
 # 함수 파일 로드
-. "$HOME/gitcode/initial_setup/functions/host_parser.sh"
+. "$Scripts_dir/functions/host_parser.sh"
 
 # 1. 192.168.30.11 --> hostname = ansible
 echo "1. 컨트롤러의 호스트네임을 ${Target_Hostname}로 변경합니다."
