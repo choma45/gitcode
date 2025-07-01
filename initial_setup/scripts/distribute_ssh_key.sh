@@ -29,7 +29,7 @@ fi
 # Hosts_to_manage 파일에서 대상 서버 목록을 다시 읽어와 SSH 키 복사 작업 수행
 while IFS= read -r Line || [[ -n "$Line" ]]; do
     parse_and_get_host_info "$Line" # 헬퍼 함수 사용
-    local Parse_Status=$? # 함수의 반환 코드 캡처
+    Parse_Status=$? # 함수의 반환 코드 캡처
 
     if [[ $Parse_Status -ne 0 ]]; then # 파싱 실패(1 또는 2)인 경우 건너뜁니다.
         continue
