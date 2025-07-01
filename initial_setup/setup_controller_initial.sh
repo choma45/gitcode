@@ -6,7 +6,7 @@ echo "==== Ansible 컨트롤러 초기 설정 시작 ===="
 
 # 실행권한 확인
 if [[ $(id -u) -ne 0 ]]; then 
-    echo -e "이 스크립트는 sudo 권한으로 실행되어야 합니다. \n # sudo ~/gitcode/initial_setup/setup_controller_intial.sh"
+    echo -e "이 스크립트는 sudo 권한으로 실행되어야 합니다. \n# sudo ~/gitcode/initial_setup/setup_controller_initial.sh"
     exit 1
 fi
 
@@ -49,9 +49,9 @@ fi
 echo "==== 대상 호스트 목록 추가 ===="
 while IFS= read -r Line || [[ -n "$Line" ]]; do
     parse_and_get_host_info "$Line"
-    local Parse_Status=$?
+    Parse_Status=$?
 
-    if [[ $Parse_Status -ne -0 ]]; then 
+    if [[ $Parse_Status -ne git 0 ]]; then 
         continue 
     fi 
 
