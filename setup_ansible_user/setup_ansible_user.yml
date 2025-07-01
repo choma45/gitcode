@@ -1,0 +1,30 @@
+---
+- name : 관리대상 서버 ansible 유저 생성
+  hosts: default_servers
+
+  tasks: 
+    #########################################################
+    # 1) ansible 유저 생성
+    # 2) wheel 그룸 설정
+    # 3) 유저 확인
+    #########################################################
+    - name: 1) ansible 유저 생성
+      ansible.builtin.user:
+        name: ansible
+        password: "{{ 'ansible' | password_hash('sha512') }}"
+        shell: /bin/bash
+        groups: wheel
+        append: yes 
+
+    - name: 2) wheel 그룹 설정 
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        regexp: '^%wheel'
+        state: present 
+        validate: 'visudo -cf %s'
+
+    - name: 3) 유저 생성 확인
+      ansible.builtin.bebug:
+        msg: "ansible 유저가 추가되고 wheel 그룹으로 설정되었습니다."
+    
