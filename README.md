@@ -1,2 +1,3 @@
-# My server project 
+# Initial server-setup project
+ 
 

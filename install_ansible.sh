@@ -10,7 +10,7 @@ sudo dnf install -y epel-release
 
 # ansible 설치 
 echo "2. Ansible 설치"
-sudo dnf intall -y ansible 
+sudo dnf install -y ansible 
 
 # 설치 확인 
 if command -v ansible &> /dev/null; then
