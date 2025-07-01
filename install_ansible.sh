@@ -19,4 +19,4 @@ if command -v ansible &> /dev/null; then
 else 
     echo "Ansible이 설치되지 않았습니다."
     exit 1
-if 
+fi
