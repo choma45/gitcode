@@ -9,7 +9,7 @@
 
 # 대상 호스트 엔트리 파싱 및 유효성 검사
 parse_and_get_host_info(){
-    local Current_Line="%1"
+    local Current_Line="$1"
     Parsed_IP=""
     Parsed_Hostname=""
 
