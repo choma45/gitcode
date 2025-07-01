@@ -20,7 +20,7 @@ Hosts_to_manage="$Scripts_dir/config_files/hosts_to_manage.txt"
 # 시스템 호스트 파일 경로
 Hosts_File="/etc/hosts"
 # 함수 파일 로드
-. "$Scripts_dir/functions/host_paser.sh"
+. "$Scripts_dir/functions/host_parser.sh"
 
 # 1. 192.168.30.11 --> hostname = ansible
 echo "1. 컨트롤러의 호스트네임을 ${Target_Hostname}로 변경합니다."
