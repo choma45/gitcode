@@ -6,7 +6,7 @@ echo "==== Ansible 컨트롤러 초기 설정 시작 ===="
 if [[ $(id -u) -ne 0]]; then 
     echo "이 스크립트는 sudo 권한으로 실행되어야 합니다. $\n # sudo ./setup_controller_intial.sh"
     exit 1
-if 
+fi
 
 # 컨트롤러(자신) 정보
 Target_Hostname="ansible"
