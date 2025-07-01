@@ -57,7 +57,7 @@ while IFS= read -r Line || [[ -n "$Line" ]]; do
 
     # 대상 엔트리가 /etc/hosts에 존재하지 않는 경우에만 추가
     if ! grep -q "^${Parsed_IP} ${Parsed_Hostname}" "$Hosts_File"; then 
-        echo "${Parsed_IP} ${Parsed_Hostname}" >> "$Hosts_file"
+        echo "${Parsed_IP} ${Parsed_Hostname}" >> "$Hosts_File"
         echo "${Parsed_IP} ${Parsed_Hostname} 추가 완료."
     else   
         echo "대상 호스트가 이미 존재합니다."
