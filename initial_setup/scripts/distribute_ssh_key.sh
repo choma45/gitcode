@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+Scripts_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. &> /dev/null && pwd )"
 
 # ~/gitcode/initial_setup/scripts/distribute_ssh_keys.sh
 
@@ -14,17 +14,6 @@ fi
 Hosts_to_manage="$Scripts_dir/config_files/hosts_to_manage.txt"
 # 함수 파일 로드 (함수를 사용하기 위해 source 합니다)
 . "$Scripts_dir/functions/host_parser.sh"
-
-echo "3. SSH 키 쌍을 생성합니다."
-ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa -q
-if [ $? -eq 0 ]; then
-    echo "SSH 키 생성 완료: ~/.ssh/id_rsa (개인키), ~/.ssh/id_rsa.pub (공개키)"
-    cat ~/.ssh/id_rsa.pub
-else
-    echo "오류: 키 생성에 실패 했습니다."
-    exit 1
-fi
-echo ""
 
 echo "4. 생성된 공개키를 각 서버의 root 사용자에게 복사합니다."
 echo "--- 중요: 이 단계에서 각 대상 서버의 'root' 비밀번호를 입력해야 합니다! ---"

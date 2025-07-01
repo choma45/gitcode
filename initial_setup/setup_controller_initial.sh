@@ -70,6 +70,18 @@ cat "$Hosts_File" | tail -n 10
 echo "" 
 
 # SSH 키 생성 및 배포 
+
+echo "3. SSH 키 쌍을 생성합니다."
+ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa -q
+if [ $? -eq 0 ]; then
+    echo "SSH 키 생성 완료: ~/.ssh/id_rsa (개인키), ~/.ssh/id_rsa.pub (공개키)"
+    cat ~/.ssh/id_rsa.pub
+else
+    echo "오류: 키 생성에 실패 했습니다."
+    exit 1
+fi
+echo ""
+
 sudo "$Scripts_dir/scripts/distribute_ssh_key.sh"
 
 echo "==== Ansible 컨트롤러 초기 설정 완료 ===="
