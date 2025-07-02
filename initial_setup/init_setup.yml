@@ -45,6 +45,6 @@
     - name: 2-3) 설정 파일 적용 - .bashrc
       shell: source ~/.bashrc 
       args:
-        excutable: /bin/bash 
+        executable: /bin/bash 
       changed_when: false  
       
