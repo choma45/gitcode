@@ -1,16 +1,4 @@
-[default_servers]
-ansible ansible_host=192.168.30.11 ansible_user=ansible 
-ansible1 ansible_host=192.168.30.12 ansible_user=ansible 
-ansible2 ansible_host=192.168.30.13 ansible_user=ansible 
-
-[host_server]
-ansible 
-
-[web_server]
-ansible2
-
-[dns_server]
+[webservers]
 ansible1
+ansible2 
 
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3

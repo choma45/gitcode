@@ -1,30 +1,26 @@
 ---
-- name : 관리대상 서버 ansible 유저 생성
-  hosts: default_servers
+- name: 관리 대상 서버 초기 설정
+  hosts: webservers 
+  gather_facts: yes 
 
+  vars_files:
+    - vars/vault_passwords.yml
+    - vars/main.yml 
   tasks: 
-    #########################################################
-    # 1) ansible 유저 생성
-    # 2) wheel 그룸 설정
-    # 3) 유저 확인
-    #########################################################
-    - name: 1) ansible 유저 생성
-      ansible.builtin.user:
-        name: ansible
-        password: "{{ 'ansible' | password_hash('sha512') }}"
-        shell: /bin/bash
-        groups: wheel
-        append: yes 
-
-    - name: 2) wheel 그룹 설정 
-      ansible.builtin.lineinfile:
-        path: /etc/sudoers
-        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-        regexp: '^%wheel'
+    #############################################
+    # 1) SSH 공개 키 복사
+    # 2) Python3 설치 확인 및 설치 
+    # 2) 
+    #############################################
+    # 1) SSH 공개 키 복사 
+    - name: 1) 공개 키 복사 
+      authorized_key:
+        user: ansible
         state: present 
-        validate: 'visudo -cf %s'
-
-    - name: 3) 유저 생성 확인
-      ansible.builtin.bebug:
-        msg: "ansible 유저가 추가되고 wheel 그룹으로 설정되었습니다."
+        key: "{{ lookup('file', ansible_home_dir + '/.ssh/id_rsa.pub') }}"
     
+    # 2) Python3 설치 확인 및 설치 
+    - name: 1) Python3 설치 확인 및 설치 
+      dnf:
+        name: Python3
+        state: present 
