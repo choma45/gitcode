@@ -21,13 +21,3 @@ else
     exit 1
 fi
 
-# .bashrc, .vimrc 설정 파일 복사 밑 적용 
-echo "설정 파일 적용"
-CONFIG_DIR="$HOME/gitcode/initial_setup/config_files"
-
-cp "$CONFIG_DIR/.bashrc" "$HOME/.bashrc"
-cp "$CONFIG_DIR/.vimrc" "$HOME/.vimrc"
-
-source "$HOME/.bashrc"
-
-echo "설정 완료"
