@@ -50,6 +50,8 @@ alias ansfs='ansible localhost -m setup | grep "ansible_*"'
 alias ansdefault='ansible-config init --disable | egrep -v "^#|^$" | grep -i $1'
 alias chrome='google-chrome %'
 
-
-
 alias c='clear'
+##############################
+# git alias 
+alias gitpush='git add. && git commit -m "a" && git push'
+alias gitpull='git pull --rebase'
