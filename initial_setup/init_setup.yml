@@ -4,10 +4,29 @@
   connection : local 
   tasks: 
     #########################################
-    # 1) 설정파일 복사 
-    # 2) 
+    # 1) 초기 설정
+    # 2) 설정파일 복사 
+    # 3) 
     #########################################
-    - name: 1-1) 설정 파일 복사 - .bashrc  
+
+    #########################################
+    # 1) 초기 설정 
+    - name: 1-1) ansible 사용자를 wheel 그룹에 추가
+      user: 
+        name: ansible
+        groups: wheel
+        append: yes
+    - name: 1-2) wheel 그룹에 NOPASSWD 권한 부여
+      lineinfiles:
+        path: /etc/sudoers
+        regexp: '^%wheel\s+ALL=\(ALL)\s+.*$'
+        line: "%wheel ALL=(ALL) NOPASSWD: ALL"
+        validate: "/usr/sbin/visudo -cf %s"
+        state: present 
+    
+    #########################################
+    # 2) 설정 파일 복사 
+    - name: 2-1) 설정 파일 복사 - .bashrc  
       copy: 
         src: ~/gitcode/initial_setup/config_files/.bashrc
         dest: ~/.bashrc 
@@ -15,7 +34,7 @@
         group: 'root'
         mode: '0755'
       
-    - name: 1-2) 설정 파일 복사 - .vimrc 
+    - name: 2-2) 설정 파일 복사 - .vimrc 
       copy:
         src: ~/gitcode/initial_setup/config_files/.vimrc 
         dest: ~/.vimrc 
