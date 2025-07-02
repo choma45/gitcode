@@ -31,7 +31,7 @@
         path: /etc/sudoers 
         regexp: '^#\s+%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL$'
         line: '^%wheel ALL=(ALL) NOPASSWD: ALL'
-        validate: 'usr/sbin/visudo -cf %s'
+        validate: '/usr/sbin/visudo -cf %s'
         state: present 
     
     # ) Python3 설치 확인 및 설치 
