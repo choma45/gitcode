@@ -19,7 +19,7 @@
     - name: 1-2) wheel 그룹에 NOPASSWD 권한 부여
       lineinfile:
         path: /etc/sudoers
-        regexp: '^%wheel\s+ALL=\(ALL)\s+.*$'
+        regexp: '^#\s*%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL$'
         line: "%wheel ALL=(ALL) NOPASSWD: ALL"
         validate: "/usr/sbin/visudo -cf %s"
         state: present 
