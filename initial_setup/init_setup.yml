@@ -28,16 +28,23 @@
     # 2) 설정 파일 복사 
     - name: 2-1) 설정 파일 복사 - .bashrc  
       copy: 
-        src: ~/gitcode/initial_setup/config_files/.bashrc
-        dest: ~/.bashrc 
-        owner: 'root'
-        group: 'root'
+        src: "{{ lookup('env', 'HOME') }}/gitcode/initial_setup/config_files/.bashrc"
+        dest: "{{ lookup('env', 'HOME') }}/.bashrc" 
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
         mode: '0755'
       
     - name: 2-2) 설정 파일 복사 - .vimrc 
       copy:
-        src: ~/gitcode/initial_setup/config_files/.vimrc 
-        dest: ~/.vimrc 
-        owner: 'root'
-        group: 'root'
+        src: "{{ lookup('env', 'HOME') }}/gitcode/initial_setup/config_files/.vimrc"
+        dest: "{{ lookup('env', 'HOME') }}/.vimrc" 
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
         mode: '0755'
+
+    - name: 2-3) 설정 파일 적용 - .bashrc
+      shell: source ~/.bashrc 
+      args:
+        excutable: /bin/bash 
+      changed_when: false  
+      
