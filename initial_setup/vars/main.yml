@@ -4,7 +4,7 @@ hosts_entries:
   - ip: 192.168.30.12
     hostname: ansible1
   - ip: 192.168.30.13
-    hostname: nasible2
+    hostname: ansible2
 
 config_files:
   - name: .bashrc 
