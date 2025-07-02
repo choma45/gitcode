@@ -1,9 +1,0 @@
-# ~/gitcode/initial_setup/config_files/hosts_to_manage.txt
-# 형식: IP_주소 호스트이름
-192.168.30.12 ansible1
-192.168.30.13 ansible2
-
-
-# 필요하다면 여기에 다른 서버들을 추가하세요.
-# 예: 192.168.30.14 webserver3
-# 예: 192.168.30.15 dbserver1
