@@ -39,5 +39,5 @@
         src: ~/gitcode/initial_setup/config_files/.vimrc 
         dest: ~/.vimrc 
         owner: 'root'
-        gruop: 'root'
+        group: 'root'
         mode: '0755'
