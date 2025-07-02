@@ -1,6 +1,7 @@
 ---
 - name: 초기 설정 
-  hosts: hostserver
+  hosts: localhost
+  connection : local 
   tasks: 
     #########################################
     # 1) 설정파일 복사 
