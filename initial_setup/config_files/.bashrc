@@ -27,7 +27,7 @@ fi
 unset rc
 
 ######################################################################
-export PS1='\[\e[31;1m\][\u@\h\[\e[33;1m\] \w]\$ \[\e[m\]'
+export PS1='\[\e[32;1m\][\u@\h\[\e[33;1m\] \w]\$ \[\e[m\]'
 
 export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
 export PATH=$HOME/.local/bin:$PATH
