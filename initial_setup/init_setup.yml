@@ -17,7 +17,7 @@
         groups: wheel
         append: yes
     - name: 1-2) wheel 그룹에 NOPASSWD 권한 부여
-      lineinfiles:
+      lineinfile:
         path: /etc/sudoers
         regexp: '^%wheel\s+ALL=\(ALL)\s+.*$'
         line: "%wheel ALL=(ALL) NOPASSWD: ALL"
