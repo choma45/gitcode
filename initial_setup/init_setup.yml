@@ -10,6 +10,7 @@
     # 1) 초기 설정
     # 2) 설정파일 복사 
     # 3) 호스트 정보 추가
+    # 4) ssh-key 생성
     #########################################
 
     #########################################
@@ -54,3 +55,14 @@
         state: present 
         create: yes
       loop: "{{ hosts_entries }}" 
+
+    #########################################
+    # 4) SSH-KEY 생성 
+    - name: 4) SSH-KEY 생성 
+      openssh_keypair:
+        path: "{{ ansible_home_dir }}/.ssh/id_rsa"
+        type: rsa 
+        size: 4096 
+        passphrase: ''
+        state: present 
+      become: no 

@@ -9,3 +9,5 @@ hosts_entries:
 config_files:
   - name: .bashrc 
   - name: .vimrc 
+
+ansible_home_dir: "{{ lookup('env', 'HOME') }}"
