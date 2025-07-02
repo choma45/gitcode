@@ -54,4 +54,4 @@ alias c='clear'
 ##############################
 # git alias 
 alias gitpush='git add. && git commit -m "a" && git push'
-alias gitpull='git pull --rebase'
+alias gitpull='cd ~/gitcode && git pull --rebase'
