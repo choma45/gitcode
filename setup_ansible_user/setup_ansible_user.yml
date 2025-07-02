@@ -10,9 +10,9 @@
     #############################################
     # 1) SSH 공개 키 복사
     # 2) ansible유저 > wheel group --> NOPASSWD 
-    # 3) nameserver 설정 
+    # 3) 호스트 목록 추가 
+    # ) nameserver 설정 
     # ) Python3 설치 확인 및 설치 
-    # ) 
     #############################################
     # 1) SSH 공개 키 복사 
     - name: 1) 공개 키 복사 
@@ -34,9 +34,19 @@
         line: '^%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: '/usr/sbin/visudo -cf %s'
         state: present 
-    
-    # 3) nameserver 설정 
-    - name: 3) nameserver 설정 
+
+    # 3) 호스트 목록 추가
+    - name: 3) 호스트 목록 추가 
+      copy:
+        src: /etc/hosts 
+        dest: /etc/hosts 
+        owner: root 
+        group: root 
+        mode: '0644'
+        backup: yes
+        
+    # 4) nameserver 설정 
+    - name: 4) nameserver 설정 
       copy: 
         content: |
           nameserver 8.8.8.8 
@@ -49,5 +59,5 @@
     # ) Python3 설치 확인 및 설치 
     - name: 1) Python3 설치 확인 및 설치 
       dnf:
-        name: Python3
+        name: python3
         state: present 
