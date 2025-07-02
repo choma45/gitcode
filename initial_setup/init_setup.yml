@@ -1,0 +1,23 @@
+---
+- name: 초기 설정 
+  hosts: hostserver
+  tasks: 
+    #########################################
+    # 1) 설정파일 복사 
+    # 2) 
+    #########################################
+    - name: 1-1) 설정 파일 복사 - .bashrc  
+      copy: 
+        src: ~/gitcode/initial_setup/config_files/.bashrc
+        dest: ~/.bashrc 
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+      
+    - name: 1-2) 설정 파일 복사 - .vimrc 
+      copy:
+        src: ~/gitcode/initial_setup/config_files/.vimrc 
+        dest: ~/.vimrc 
+        owner: 'root'
+        gruop: 'root'
+        mode: '0755'
