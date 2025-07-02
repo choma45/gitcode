@@ -1,0 +1,11 @@
+hosts_entries:
+  - ip: 192.168.30.11
+    hostname: ansible
+  - ip: 192.168.30.12
+    hostname: ansible1
+  - ip: 192.168.30.13
+    hostname: nasible2
+
+config_files:
+  - name: .bashrc 
+  - name: .vimrc 

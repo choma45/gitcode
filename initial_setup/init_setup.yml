@@ -2,11 +2,14 @@
 - name: 초기 설정 
   hosts: localhost
   connection : local 
+  vars_files:
+    - vars/main.yml 
+
   tasks: 
     #########################################
     # 1) 초기 설정
     # 2) 설정파일 복사 
-    # 3) 
+    # 3) 호스트 정보 추가
     #########################################
 
     #########################################
@@ -28,23 +31,26 @@
     # 2) 설정 파일 복사 
     - name: 2-1) 설정 파일 복사 - .bashrc  
       copy: 
-        src: "{{ lookup('env', 'HOME') }}/gitcode/initial_setup/config_files/.bashrc"
-        dest: "{{ lookup('env', 'HOME') }}/.bashrc" 
+        src: "{{ lookup('env', 'HOME') }}/gitcode/initial_setup/config_files/{{ item.name }}"
+        dest: "{{ lookup('env', 'HOME') }}/{{ item.name }}" 
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_gid }}"
         mode: '0755'
-      
-    - name: 2-2) 설정 파일 복사 - .vimrc 
-      copy:
-        src: "{{ lookup('env', 'HOME') }}/gitcode/initial_setup/config_files/.vimrc"
-        dest: "{{ lookup('env', 'HOME') }}/.vimrc" 
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_gid }}"
-        mode: '0755'
+      loop: "{{ config_files }}"      
 
     - name: 2-3) 설정 파일 적용 - .bashrc
-      shell: source "{{ lookup('env', 'HOME') }}/.bashrc" 
+      shell: source ~/.bashrc 
       args:
         executable: /bin/bash 
       changed_when: false  
       
+    #########################################
+    # 3) 호스트 정보 추가
+    - name: 3) 호스트 정보 추가 
+      lineinfile: 
+        path: /etc/hosts
+        regexp: "^{{ item.ip }}\\s+{{ item.hostname }}$"
+        line: "{{ item.ip }} {{ item.hostname }}"
+        state: present 
+        create: yes
+      loop: "{{ hosts_entries }}" 

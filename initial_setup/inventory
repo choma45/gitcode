@@ -1,2 +1,13 @@
 [hostserver]
 ansible
+
+[all_servers]
+ansible
+ansible1
+ansible2
+
+[web_server]
+ansible2
+
+[dns_server]
+ansible 
