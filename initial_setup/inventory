@@ -1,2 +1,7 @@
 [hostserver]
 ansible
+
+[webservers]
+ansible1
+ansible2 
+
