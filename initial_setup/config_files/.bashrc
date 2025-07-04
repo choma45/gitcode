@@ -53,5 +53,5 @@ alias chrome='google-chrome %'
 alias c='clear'
 ##############################
 # git alias 
-alias gitpush='git add. && git commit -m "a" && git push'
+alias gitpush='git add . && git commit -m "a" && git push'
 alias gitpull='cd ~/gitcode && git stash && git pull --rebase'
