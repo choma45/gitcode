@@ -24,6 +24,11 @@ if [ -d ~/.bashrc.d ]; then
 	done
 fi
 
+function gitpush_time() {
+	local commit_time=$(date +"%Y-%m-%d %H:%M:%S")
+	git add . && git commit -m "$commit_time" && git push
+}
+
 unset rc
 
 ######################################################################
@@ -53,5 +58,5 @@ alias chrome='google-chrome %'
 alias c='clear'
 ##############################
 # git alias 
-alias gitpush='git add . && git commit -m "a" && git push'
+alias gitpush='gitpush_time'
 alias gitpull='cd ~/gitcode && git stash && git pull --rebase'
