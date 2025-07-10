@@ -3,6 +3,8 @@
 cd ~/gitcode/initial_setup/
 install_ansible.sh
 ansible-playbook init_setup.yml --ask-become-pass
+# 현재 사용중인 IP 입력
+
 ## passwd: ansible
 source ~/.bashrc 
 anp setup_ansible_user.yml --ask-vault-pass
