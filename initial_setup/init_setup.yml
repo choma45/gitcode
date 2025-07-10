@@ -5,6 +5,23 @@
   vars_files:
     - vars/main.yml 
 
+  vars: 
+    selected_ip_subnet: "{{ (ansible_prompt_result.user_input.split('.')[2]) | int }}"
+    dynamic_hosts_entries:
+      - ip: "192.168.{{ selected_ip_subnet }}.10"
+        hostname: ansible 
+      - ip: "192.168.{{ selected_ip_subnet }}.20"
+        hostname: ansible1
+      - ip: "192.168.{{ selected_ip_subnet }}.30"
+        hostname: ansible2 
+  pre_tasks: 
+    - name: IP 대역 확인
+      ansible.builtin.pause:
+        prompt: "현재 사용중인 IP 주소를 입력 해주세요. (예: 192.168.20.10)"
+        echo: yes
+      register: ansible_prompt_result 
+
+
   tasks: 
     #########################################
     # 1) 초기 설정
@@ -54,7 +71,7 @@
         line: "{{ item.ip }} {{ item.hostname }}"
         state: present 
         create: yes
-      loop: "{{ hosts_entries }}" 
+      loop: "{{ dynamic_hosts_entries }}" 
 
     #########################################
     # 4) SSH-KEY 생성 
