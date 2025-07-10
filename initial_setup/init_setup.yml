@@ -40,14 +40,14 @@
     - name: 1-2) wheel 그룹에 NOPASSWD 권한 부여
       lineinfile:
         path: /etc/sudoers
-        regexp: '^#\s*%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL$'
+        regexp: '^#\%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL$'
         line: "%wheel ALL=(ALL) NOPASSWD: ALL"
         validate: "/usr/sbin/visudo -cf %s"
         state: present 
     
     #########################################
     # 2) 설정 파일 복사 
-    - name: 2-1) 설정 파일 복사 - .bashrc  
+    - name: 2-1) 설정 파일 복사 - .bashrc, .vimrc  
       copy: 
         src: "{{ lookup('env', 'HOME') }}/gitcode/initial_setup/config_files/{{ item.name }}"
         dest: "{{ lookup('env', 'HOME') }}/{{ item.name }}" 
