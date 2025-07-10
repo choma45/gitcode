@@ -1,0 +1,10 @@
+[web]
+ansible1
+ansible2
+
+[host]
+ansible 
+
+[dns]
+ansible
+

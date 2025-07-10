@@ -8,12 +8,31 @@
     - vars/main.yml 
   tasks: 
     #############################################
+    # 0) ansible 유저 생성 (필요 시)
     # 1) SSH 공개 키 복사
     # 2) ansible유저 > wheel group --> NOPASSWD 
     # 3) 호스트 목록 추가 
     # ) nameserver 설정 
     # ) Python3 설치 확인 및 설치 
     #############################################
+    # 0) ansible 유저 생성
+    - name: 0) ansible 유저 생성
+      ansible.builtin.user:
+        name: ansible
+        shell: /bin/bash
+        home: /home/ansible
+        state: present
+        create_home: true
+        groups: wheel
+        append: yes 
+
+    # 0-1) ssh 공개키 복사 - root
+    - name: 0-1) 공개 키 복사 - root 
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', ansible_home_dir + '/.ssh/id_rsa.pub') }}"
+
     # 1) SSH 공개 키 복사 
     - name: 1) 공개 키 복사 
       authorized_key:
@@ -21,13 +40,8 @@
         state: present 
         key: "{{ lookup('file', ansible_home_dir + '/.ssh/id_rsa.pub') }}"
     
-    # 2) ansible 유저 권한 상승
-    - name: 2-1) ansible 유저를 wheel 그룹에 추가합니다.  
-      user:
-        name: ansible
-        groups: wheel 
-        append: yes 
-    - name: 2-2) wheel 그룹 권한 상승 
+    # 2) ansible유저(wheel 그룹) 권한 상승
+    - name: 2) wheel 그룹 권한 상승 
       lineinfile: 
         path: /etc/sudoers 
         regexp: '^#\s+%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL$'

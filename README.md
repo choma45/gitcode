@@ -8,3 +8,4 @@ source ~/.bashrc
 anp setup_ansible_user.yml --ask-vault-pass
 ## passwd: ansible
 
+## 초기 설정 작업이 완료되면 ~/gitcode로 돌아옵니다.
