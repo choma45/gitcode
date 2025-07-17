@@ -1,0 +1,51 @@
+# /etc/named.conf
+
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { none; };
+    directory   "{{ bind_zone_dir }}";
+    dump-file   "{{ bind_zone_dir }}/data/cache_dump.db";
+    statistics-file     "{{ bind_zone_dir }}/data/named_stats.txt";
+    memstatistics-file  "{{ bind_zone_dir }}/data/named_mem_stats.txt"
+    secroots-file   "{{ bind_zone_dir }}/data/named.secroots";
+    recursion yes;
+
+    allow-query { any; };
+
+    dnssec-enable yes;
+    dnssec-validation yes;
+
+    bindkeys-file "/etc/named.root.key";
+    managed-keys-directory "{{ bind_zone_dir }}/dynamic";
+};
+
+logging {
+    channel default_log {
+        file "/var/log/named/named.log" version 3 size 5m;
+        severity info;
+        print-time yes;
+    };
+    category default { default_log; };
+};
+
+zone "." IN {
+    type hint;
+    file "named.ca";
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+
+## Custom zones
+zone "{{ dns_domanin_name }}" IN {
+    type master;
+    file "{{ dns_domanin_name }}.zone";
+    allow-update { none; };
+};
+
+zone "{{ dns_reverse_octet }}.168.192.in-addr.arpa" IN {
+    type master:
+    file "db.{{ dns_reverse_octet }}.168.192";
+    allow-update { none; };
+};
+

@@ -1,0 +1,10 @@
+; Reverse lookup zone file for 192.168.{{ dns_server_octet }}.0/24
+$TTL 86400
+@   IN  SOA     ns1.{{ dns_domain_name }}. {{ dns_admin_email }}. (
+                {{ now().strftime('%Y%m%d%H%M%S') }}        ; Serial
+                3600        ; Refresh
+                1800        ; Retry
+                604800      ; Expire 
+                86400 )     ; Minimum TTL 
+
+@   IN  NS      ns1.{{ dns_domain_name }}.    

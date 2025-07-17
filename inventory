@@ -1,10 +1,16 @@
-[web]
-ansible1
-ansible2
+# ~/gitcode/inventory 
 
-[host]
-ansible 
+[dns_servers]
+192.168.20.10 dns_domain_name="example20.com"
+192.168.30.10 dns_doamin_name="example30.com"
+192.168.40.10 dns_domain_name="example40.com"
 
-[dns]
-ansible
+[client_servers]
+192.168.20.20
+192.168.20.30
+192.168.30.20
+192.168.30.30
+192.168.40.20
+192.168.40.30
+
 

@@ -1,0 +1,30 @@
+# vars/dns_local_vars.yml
+
+---
+dns_domain_name: "mylab.local"
+
+dns_reverse_octet: "{{ ansible_host_ip.split('.')[2] }}"
+
+bind_zone_dir: "/var/named"
+
+dns_admin_email: "admin.{{ dns_domain_name }}"
+
+dns_managed_hosts:
+  # 컨트롤 노드의 호스트 이럼
+  - ip: "{{ ansible_host_ip }}"
+    hostname: ansible_control
+
+  # 개발 서버의 호스트 이름
+  - ip: "192.168.{{ dns_reverse_octet }}.10"
+    hostname: dev_server_10
+
+  # 웹서버 호스트이름
+  - ip: "192.168.{{ dns_reverse_octet }}.20"
+    hostname: web_server_20
+  - ip: "192.168.{{ dns_reverse_octet }}.30"
+    hostname: web_server_30 
+
+  # db 서버
+  - ip: "192.168.{{ dns_reverse_octet }}.20"
+    hostname: db_server_20
+

@@ -1,0 +1,18 @@
+# group_vars/dns_servers.yml
+---
+# 해당 서버의 IP 대역 추출
+dns_reverse_octet: "{{ inventory_hostname.split('.')[2] }}"
+
+# admin 이메일 주소 설정
+dns_admin_email_suffix: "admin."
+dns_admin_email: "{{ dns_admin_email_suffix }}{{ dns_domain_name }}"
+
+# 해당 대역에서 관리할 IP 
+{% set ip_suffixes_to_manage = [10, 20, 30] %}
+
+dns_managed_hosts:
+{% for suffix in ip_suffixes_to_manage %}
+  - ip: "{{ inventory_hostsname.split('.')[1] }}.{{ dns_reverse_octet }}.{{ suffix }}"
+    hostname: "{{ 'ns1' if suffix == 10 else 'server' ~ suffix }}"
+{% endfor %}
+

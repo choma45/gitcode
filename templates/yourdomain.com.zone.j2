@@ -1,0 +1,13 @@
+; {{ dns_domin_name }} forward lookup zone file 
+$TTL 86400
+@   IN  SOA ns1.{{ dns_domain_name }}. {{ dns_admin_email }}. (
+            {{ now().strftime('%Y%m%d%H%M%S') }}        ; Serial
+            3600    ; Refresh
+            1800    ; Retry
+            6048000 ; Expire
+            86400 ) ; Minimum TTL 
+
+@   IN  NS  ns1.{{ dns_domain_name }}.
+{% for host in dns_managed_hosts %}
+{{ host.hostname }} IN  A   {{ host.ip }}
+{% endfor %}
